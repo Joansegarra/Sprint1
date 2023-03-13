@@ -1,67 +1,70 @@
 // Nivell 1
-/* Exercici 1. Crear funció que imprimeixi el consola el 
-nom d'usuari sent invocada externament i passant el nom com a paràmetre.*/
+/* Exercici 1. Crea una funció que mostri per consola el nom d'usuari/ària en invocar-la passant-li
+ el nom com a paràmetre.*/
 
-function printname (nombre){
-    console.log(nombre);
-}
+function imprimirNomUsuari(nomUsuari) {
+    console.log('El nom d\'usuari és: ' + nomUsuari);
+  }
 
-printname('Joan');
-printname('Nuevo nombre');
+  imprimirNomUsuari('Pep');
+
 
 //Nivell 2
-/*- Exercici 1
-Imprimir el nom i cognoms de l'usuari en variables mitjançant 
-template literals, creant les variables i referenciant en la impressió de l'missatge
-*/
-let user_name = 'Joan';
-let last_name = 'Segarra';
-console.log(`El usuario es ${user_name} ${last_name} `);
+/*- Exercici 1. Mostra per consola el nom i cognoms de l'usuari/ària mitjançant template literals, 
+guardant-los en variables i referenciant-les en la impressió del missatge.*/
+
+const nom = 'Maria';
+const cognoms = 'Garcia Pérez';
+
+console.log(`El nom complet de l'usuari/ària és: ${nom} ${cognoms}`);
 
 
-/*- Exercici 2
-Invocar la funció mitjançant template literals */
+//Nivell 2
+/*- Exercici 2. Invoca una funció que retorni un valor des de dins d'una template literal.*/
 
-function print_name_lastname(nombre, apellido){
-    return (`${nombre} ${apellido}`);
-}
+function obtenirSalutacio(hora) {
+    if (hora >= 0 && hora < 12) {
+      return 'Bon dia';
+    } else if (hora >= 12 && hora < 18) {
+      return 'Bona tarda';
+    } else {
+      return 'Bona nit';
+    }
+  }
+  
+  const horaActual = 15;
+  const salutacio = obtenirSalutacio(horaActual);
+  
+  console.log(`"${salutacio}, són les ${horaActual} hores."`);
 
-console.log(`Los datos del usuario son: ${print_name_lastname(user_name, last_name)}`);
+
 
 //Nivell 3
-/* Exercici 1
-Crea una matriu de deu funcions i empleni-la mitjançant un bucle. 
-Cada funció comptarà del 0-9 imprimint-ho per pantalla. 
-Invoqui cada funció de l'array iterativament. 
-Haurà d'imprimir-se per pantalla el compte de 0-9 deu vegades */
+/* Exercici 1. Crea una matriu de deu funcions i emplena-la mitjançant un bucle de manera que cada funció 
+compti del 0 al 9 per la consola. Invoca cada funció de l'array iterativament. 
+Haurà de mostrar-se per consola el compte del 0 al 9 deu vegades.*/
 
-//Declarar array
-const array_de_funciones = new Array(10);
+const funcions = [];
 
-//función contenido de escritura de numeros
-const contenido = function write_numbers() {
-    let line ='';
-    for (let i = 0; i <= 9; i++){
-        line = line + i;
+for (let i = 0; i < 10; i++) {
+  funcions[i] = function() {
+    for (let j = 0; j < 10; j++) {
+      console.log(j);
     }
-    console.log(line);
+  }
 }
 
-//Rellenar elementos del array con la función
-for (let count =0; count < array_de_funciones.length; count++){
-    array_de_funciones[count] = contenido;
+for (let i = 0; i < 10; i++) {
+  funcions[i]();
 }
 
-//invocar las funciones guardadas en cada elemento del array
-for (let i = 0; i<=9; i++){
-    array_de_funciones[i]();
-}
 
-//- Exercici 2
-/*Crear una funció anònima autoinvocable (igualada a una variable) 
-que imprimeixi per pantalla el nom d'usuari rebut com a paràmetre */
-let nombre_anonimo = 'Sin nombre';
+//Nivell 3
+/* Exercici 2. Crea una funció anònima autoinvocable igualada a una variable 
+que mostri per consola el nom de l'usuari/ària a rebut com a paràmetre.*/
 
-const funcion_anonima = (function (nombre){
-    console.log(nombre);
-    })(nombre_anonimo);
+var nomUsuari = 'Manel';
+
+(function(nom) {
+  console.log('Hola ' + nom + '!');
+})(nomUsuari);
