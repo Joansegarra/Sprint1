@@ -117,7 +117,7 @@ const getEmployee = (id) => {
 };
 
 // Exemple d'ús
-getEmployee(2)
+getEmployee(3)
   .then(res => console.log(res))
   .catch(err => console.error(err));
 
@@ -138,10 +138,14 @@ let getSalary = (employee) => {
   }
   
   // Exemple d'ús
-  getEmployee(1)
+
+  
+
+  getEmployee(3)
     .then(employee => getSalary(employee))
     .then(salary => console.log(`The employee's salary is ${salary}`))
     .catch(err => console.log(err));
+  
   
 
 /* - Exercici 3

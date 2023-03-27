@@ -83,7 +83,8 @@ function doubleAfterTwoSeconds(num) {
     });
   }
   
-  // Funció que rep tres números i calcula la suma dels seus dobles fent servir la funció anterior
+  
+// Funció que rep tres números i calcula la suma dels seus dobles fent servir la funció anterior
   async function sumDoubles(num1, num2, num3) {
     try {
       const double1 = await doubleAfterTwoSeconds(num1);
@@ -110,7 +111,7 @@ function doubleAfterTwoSeconds(num) {
 //- Exercici 1
 /*Força i captura tants errors com puguis dels nivells 1 i 2.*/
 
-/*
+
 // Nivell 1 - Exercici 1
 async function printEmployeeSalary(id) {
     try {
@@ -122,7 +123,8 @@ async function printEmployeeSalary(id) {
     }
   }
   
-  // Nivell 1 - Exercici 2
+  
+// Nivell 1 - Exercici 2
   async function callAsyncFunction() {
     try {
       const result = await asyncFunction();
@@ -156,16 +158,17 @@ async function printEmployeeSalary(id) {
       console.log(error.message);
     }
   }
-  */
+
   // Exemples d'ús amb possibles errors
 
-/*
+
   printEmployeeSalary(1); // OK
   printEmployeeSalary(100); // Error: Employee not found
   printEmployeeSalary('x'); // Error: Invalid parameter
   callAsyncFunction(); // OK
-  callAsyncFunctionError(); // Error: Function not defined
-*/  
+  
+  //callAsyncFunctionError(); // Error: Function not defined
+
   sumDoubles(1, 2, 3); // OK
   
   sumDoubles(1, 'x', 3); // Error: Parameter is not a number
