@@ -73,7 +73,7 @@ Crea una funció que llisti per la consola el contingut del directori d'usuari/�
 const { exec } = require("child_process");
 
 function listUserDirectory() {
-  exec("ls ~", (error, stdout, stderr) => {
+  exec("ls ~/documents/GitHub/Sprint1/", (error, stdout, stderr) => {
     if (error) {
       console.error(`exec error: ${error}`);
       return;
@@ -95,16 +95,71 @@ Crea una altra funció que desencripti i descodifiqui els fitxers de l'apartat a
 Inclou un README amb instruccions per a l'execució de cada part.*/
 
 
+const crypto = require('crypto');
 
-
-function createEncodedFiles() {
-  const fileContents = fs.readFileSync('./file.txt');
+function createEncodedFiles(filename) {
+  // Llegir el contingut del fitxer
+  const data = fs.readFileSync(filename);
   
-  // Codificació en hexadecimal
+  // Codificar en hexadecimal
+  const hexEncodedData = data.toString('hex');
+  
+  // Codificar en base64
+  const base64EncodedData = data.toString('base64');
+  
+  // Escriure els fitxers codificats
+  fs.writeFileSync(`${filename}.hex`, hexEncodedData);
+  fs.writeFileSync(`${filename}.base64`, base64EncodedData);
+  
+  console.log(`S'han creat els fitxers codificats ${filename}.hex i ${filename}.base64`);
+}
+
+
+
+createEncodedFiles('output.txt');
+
+
+function encryptFiles(filename) {
+  // Generar una clau de xifratge aleatòria
+  const key = crypto.randomBytes(24);
+  
+  // Generar un vector d'inicialització aleatori
+  const iv = crypto.randomBytes(16);
+  
+  // Crear una instància del xifratge AES-192-CBC
+  const cipher = crypto.createCipheriv('aes-192-cbc', key, iv);
+  
+  // Llegir el contingut del fitxer codificat en hexadecimal
+  const hexEncodedData = fs.readFileSync(`${filename}.hex`);
+  
+  // Encriptar el contingut
+  const encryptedData = Buffer.concat([cipher.update(hexEncodedData), cipher.final()]);
+  
+  // Escriure el fitxer encriptat
+  fs.writeFileSync(`${filename}.enc`, encryptedData);
+  
+  // Esborrar el fitxer codificat en hexadecimal
+  fs.unlinkSync(`${filename}.hex`);
+  
+  // Esborrar el fitxer codificat en base64
+  fs.unlinkSync(`${filename}.base64`);
+  
+  console.log(`S'ha encriptat el fitxer ${filename}.enc`);
+  
+  return { key, iv };
+}
+
+
+
+/*
+function createEncodedFiles() {
+  const fileContents = fs.readFileSync('output.txt');
+  
+// Codificació en hexadecimal
   const hexEncodedData = fileContents.toString('hex');
   fs.writeFileSync('./file_hex.txt', hexEncodedData);
 
-  // Codificació en base64
+// Codificació en base64
   const base64EncodedData = fileContents.toString('base64');
   fs.writeFileSync('./file_base64.txt', base64EncodedData);
 }
@@ -133,15 +188,15 @@ function encryptFiles() {
 
   base64EncodedStream.pipe(base64EncryptedStream).pipe(base64OutputStream);
 
+
 // Esborrar fitxers originals
   fs.unlinkSync('./file_hex.txt');
   fs.unlinkSync('./file_base64.txt');
 }
 
+
+
 //per desencriptar els fitxers encriptats
-
-
-
 function decryptFiles() {
   const algorithm = 'aes-192-cbc';
   const password = 'mysecretpassword';
@@ -159,3 +214,4 @@ function decryptFiles() {
 
   base
 }
+*/
